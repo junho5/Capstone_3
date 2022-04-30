@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>방문자 기록</title>
+  <link rel="stylesheet" href="./frontUser.css" />
+</head>
+
+<body>
+  <nav>
+    <a href="/">로그인</a>
+    <a href="/visit">방문기록</a>
+    <a href="/upload">파일전송</a>   
+  </nav>
+  
+  <h2>방문 기록을 남기세요.</h2> 
+  <div>
+    <form id="form">
+      <label>방문자 명</label>
+      <input type="text" id="name"><br>
+      <label>남기는 말</label>
+      <input type="text" id="memo">
+      <button type="submit">제출</button>
+    </form>
+  </div>
+  <p> 
+  <div id="list"></div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./frontUser.js"></script>
+</body>
+</html>
