@@ -1,0 +1,64 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    
+}
+
+.wrap{
+    height: 90%;
+}
+#main{
+    margin-top: 50px;
+    padding-top: 1em;
+    padding-top: 100px;
+    height:90%;
+    position:relative;
+    padding-bottom:1em;    
+}
+#content{
+    height:90%;
+    padding-top: 5%;
+}
+.footer {
+    height: 10%;
+    margin-top: 1em;
+    padding-top: 1em;
+    color: #aaa;
+     border-top: .05rem solid #e5e5e5; }
+.foot{
+     text-align: center;}
+.logo{
+    height: 30%;
+}
+.info{
+    height: 70%;
+    padding-top: 40%;
+}
+#main2{
+    height: 80%;
+}
+#img1{
+    height: 70%;
+    vertical-align: middle;
+}
+#info2{
+    padding-top: 10%;
+}
+
+#navbar{
+    
+    background-color: rgb(74,74,74);
+}
+#tt{
+    color: rgb(105,193,129);
+    font-size: 25px;
+    
+}
+#menu{
+    width: 200%;
+}
+#go{
+    color: red;
+}
