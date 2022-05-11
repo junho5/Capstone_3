@@ -1,0 +1,42 @@
+extends layout 
+
+block content 
+    section
+        #main.container
+            #main2.clearfix
+                #content
+                    p.fs-4.text-center 검색기능??
+                    #plant_list
+                        ul.row 
+                            each a in data
+                                .plant_info.col-md-4
+                                    .plant_name 
+                                        a(href='/detail/'+a.id)=a.name
+                                    .plant_id 
+                                        p=a.id
+                .container
+                    nav(aria-label='Page navigation example')
+                        ul.pagination.justify-content-center
+                            -var curSet = pasing.curSet
+                            -var endPage = pasing.endPage
+                            -var startPage = pasing.startPage
+                            -var totalSet = pasing.totalSet
+                            -var totalPage = pasing.totalPage
+                            -var page_list_size = pasing.page_list_size
+                            -var page_size = pasing.page_size
+                            -var curPage = pasing.curPage
+                            if(curSet > 1)
+                                li.page-item(value=(startPage-1))
+                                    a.page-link(href='/pasing/'+( startPage - 1)) 이전페이지
+                            - for(var i= startPage;i<= endPage;i++)
+                                if(i > totalPage)
+                                    - break
+                                if(i == curPage)
+                                    li.page-item.active(value= i)
+                                        a.page-link(href = '/pasing/'+i)=i
+                                else
+                                    li.page-item(value=i)
+                                        a.page-link(href = '/pasing/'+i)=i
+                            if(curSet < totalSet)
+                                li.page-item.next(value=(endPage +1))
+                                    a.page-link(href='/pasing/'+(endPage+1)) 다음페이지

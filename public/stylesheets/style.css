@@ -3,62 +3,228 @@ html{
 }
 body{
     height: 100%;
-    
+    overflow: auto;
 }
 
+/*전체 감싸기 */
 .wrap{
-    height: 90%;
-}
-#main{
-    margin-top: 50px;
-    padding-top: 1em;
-    padding-top: 100px;
-    height:90%;
-    position:relative;
-    padding-bottom:1em;    
-}
-#content{
-    height:90%;
-    padding-top: 5%;
-}
-.footer {
-    height: 10%;
-    margin-top: 1em;
-    padding-top: 1em;
-    color: #aaa;
-     border-top: .05rem solid #e5e5e5; }
-.foot{
-     text-align: center;}
-.logo{
-    height: 30%;
-}
-.info{
-    height: 70%;
-    padding-top: 40%;
-}
-#main2{
-    height: 80%;
-}
-#img1{
-    height: 70%;
-    vertical-align: middle;
-}
-#info2{
-    padding-top: 10%;
+    height: 100%;
 }
 
+/* navbar부분 관련 css */
+.header{
+    height: 12%;
+}
 #navbar{
-    
+    height: 12%;
+
     background-color: rgb(74,74,74);
+}
+#bar{
+    height: 100%;
+}
+#logoDiv{
+    height: 100%;
+}
+#menu{
+    width: 100%;
+}
+#imgLogo{
+    height: 100%;
 }
 #tt{
     color: rgb(105,193,129);
     font-size: 25px;
     
 }
-#menu{
-    width: 200%;
+
+
+
+/*  헤더 아래부분 부터 푸터 윗부분까지 Layout 선언하고 짜는게 좋을 듯 */
+#main{
+    height:100%;
+    
 }
+#main2{
+    height: 100%;
+}
+#content{
+    height:95%;
+    padding-top: 5%;
+}
+section{
+    height: 78%;
+    overflow: auto;
+}    
+/* footer 관련 css */
+
+.footer {
+   
+    width: 100%;
+    bottom: 0px;
+    height: 10%;
+    color: #aaa;
+     border-top: .05rem solid #e5e5e5; 
+}
+.foot{
+     text-align: center;
+}
+
+/* 메인페이지(홈화면)관련 css */
+.mainImg{
+    padding-top: 5%;
+    max-width: 100%;
+    object-fit: cover;
+}
+#recommend{
+    
+    color: red;
+}
+#recom{
+    padding-top: 5%;
+}
+
+/* about Us 관련 css */
+
+.logo{
+    height: 40%;
+}
+.info{
+    height: 70%;
+    padding-top: 20%;
+}
+#img1{
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+}
+#info2{
+    padding-top: 10%;
+}
+
+
+
+/* recommend 첫페이지 관련 화면 */
 #go{
     color: red;
+}
+/* input 페이지 */
+
+#input_form{
+    height: 100%;
+    overflow: auto;
+}
+#left{
+    height: 80%;
+}
+
+.plant_water{
+    height: 25%;
+}
+.plant_temperature{
+    height: 25%;
+}
+
+.plant_height{
+    height: 25%;
+}
+.plant_flower{
+    height: 25%;
+}
+
+#right{
+    height: 80%;
+}
+
+
+.plant_light{
+    height: 25%;
+    
+}
+.plant_width{
+    height: 25%;
+}
+.plant_toxicity{
+    height: 25%;
+}
+.plant_fruit{
+    height: 25%;
+}
+#plant_water{
+    
+    margin-left: 2%;
+}
+
+.water{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+
+}
+.ask{
+    height: 20%;
+}
+
+#plant_temperature{
+    width:100%;
+}
+.temperature{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+}
+.height{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+
+}
+#plant_height{
+    margin-left: 2%;
+}
+.width{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+}
+#plant_width{
+    margin-left: 2%;
+}
+.flower{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+}
+#plant_flower{
+    margin-left: 2%;
+}
+.light{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+}
+#plant_light{
+    margin-left: 2%;
+}
+.toxicity{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+}
+#plant_toxicity{
+    margin-left: 2%;
+}
+.fruit{
+    width: 100%;
+    padding-top: 10%;
+    text-align: center;
+}
+#plant_fruit{
+    margin-left: 2%;
+}
+.pager{
+    display: inline-block;
+}
+.pager li{
+    display: inline;
 }
