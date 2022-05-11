@@ -19,7 +19,7 @@ app.set('view engine', 'pug');
 app.get('/',(req,res)=>{
     res.render('main');
 });
-// sql 테스트 부분 
+// sql 테스트 
 app.get('/aboutus',(req,res)=>{
     testQuery = "SELECT * FROM user";
     conn.query(testQuery, function (err, results, fields) {
