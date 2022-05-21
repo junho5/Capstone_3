@@ -26,24 +26,33 @@ app.use(express.json());
 app.set('views',path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-
 app.get('/',(req,res)=>{
     res.render('main');
 });
-// sql 테스트 
+
 app.get('/aboutus',(req,res)=>{
-    testQuery = "SELECT * FROM user";
-    conn.query(testQuery, function (err, results, fields) {
-    if (err) {
-        console.log(err);
-    }
-    console.log(results);
-});
     res.render('aboutUs');
 });
 
 app.get('/recommend',(req,res)=>{
     res.render('recommend');
+});
+app.get('/recommend/input',(req,res)=>{
+    res.render('input');
+});
+app.post('/recommend/input',(req,res)=>{
+    console.log(req.body);
+    res.send(req.body);
+    res.end();
+});
+app.get('/login',(req,res)=>{
+    res.render('login');
+});
+app.get('/join',(req,res)=>{
+    res.render('join');
+});
+app.get('/search',(req,res)=>{
+    res.redirect('/pasing/' + 1)
 });
 
 app.listen(app.get('port'),()=>{

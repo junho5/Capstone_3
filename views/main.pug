@@ -1,7 +1,10 @@
 extends layout 
 
-block content 
-    #main.container
-        #main2.clearfix
-            p 김현중 빨리짜 병신아
-            
+block content
+    section
+        #main.container
+            #main2.clearfix
+                #content
+                    img.mainImg(src='/images/main.jpeg')
+                    p#recom.fs-4.text-center
+                        a#recommend(href = '/recommend/input') Recommend

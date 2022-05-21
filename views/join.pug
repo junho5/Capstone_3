@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    #main.container
+        #main2.clearfix
+            #content
+                .join-wrap
+                    form#joinForm(action="/join")
+                        .id-info
+                            p 8~20자의 영어, 숫자만 가능합니다. 
+                        .id-wrap
+                            input#id-input(type="text")
+                            span#phTxt_id 아이디를 입력해주세요.
+                        .join-id-error
+                        .pw-info
+                            p 8~20자의 영어, 숫자, 특수문자만 가능합니다.
+                        .pw-wrap
+                            input#pw-input(type="password")
+                            span#phTxt_pw 비밀번호를 입력해주세요.
+                        .join-pw-error
+                        .pw-wrap
+                            input#pw-re-input(type="password")
+                            span#phTxt_re_pw 비밀번호를 다시 입력해주세요.
+                        .join-pw-re-error
+                        .email-wrap
+                            input#email-input(type="password")
+                            span#phTxt_email 이메일을 입력해주세요.
+                        .email-error
+                        .joinBtn-wrap
+                            button#joinBtn(type="submit") 회원가입
+                script(src="/join.js")

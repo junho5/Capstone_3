@@ -1,0 +1,22 @@
+extends layout 
+
+block content
+    #main.container
+        #main2.clearfix
+            #content 
+                .login-wrap
+                    form#loginForm(action="/login")
+                        .id-wrap
+                            input#id-input(type="text")
+                            span.phTxt_id 아이디(Id)
+                        .id-error
+                        .pw-wrap
+                            input#pw-input(type="password")
+                            span.phTxt_pw 비밀번호(Password)
+                        .pw-error
+                        .loginBtn-wrap
+                            button#loginBtn(type="submit") 로그인
+                        .joinBtn-wrap
+                            a(href="/join") 
+                                button#joinBtn(type="button") 회원가입
+    script(src="/login.js")
