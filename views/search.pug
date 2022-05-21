@@ -11,10 +11,11 @@ block content
                             each a in data
                                 .plant_info.col-md-4
                                     .plant_name 
-                                        a(href='/detail/'+a.id)=a.name
-                                    .plant_id 
-                                        p=a.id
-                .container
+                                        a(href='/detail/'+a.plant_num)=a.plant_name
+                                    .plant_id
+                                        a(href='/detail/'+a.plant_num)
+                                            img.img-fluid(src=a.image href='/detail/'+a.id)
+                
                     nav(aria-label='Page navigation example')
                         ul.pagination.justify-content-center
                             -var curSet = pasing.curSet

@@ -4,3 +4,36 @@ block content
     section
         #main.container
             #main2.clearfix
+                #content
+                    p.fs-4.text-center=data.plant_name
+                    .text-center
+                        img.img-fluid.text-center(src=data.image)
+                        if (data.light ==1)
+                            p 조도  300 lux ~ 10000 lux
+                        if (data.light ==2)
+                            p 조도  800 lux ~ 10000 lux
+                        if (data.light ==3)
+                            p 조도  1500 lux ~10000 lux
+                        
+
+                        
+                        p 생육 최저 온도: #{data.temp}°C
+                        if (data.water ==1)
+                            p 물주기: 흙 속까지 완전히 마르면 충분히 관수함
+                        if (data.water ==2)
+                            p 물주기: 흙 겉면이 마르면 충분히 관수함
+                        if (data.water ==3)
+                            p 물주기: 항상 촉촉하게 유지함(물에 잠기지 않도록 주의)
+                        if (data.water ==4)
+                            p 물주기: 항상 촉촉하게 유지(수경식물)
+                        
+                        p 높이: #{data.height} cm 
+                        p 너비: #{data.width} cm
+                        if (data.poison ==0)
+                            p 독성 유무: 독성 없음. 
+                        if (data.poison ==1)
+                            p 독성 유무: 독성 있음. 
+
+                    
+                
+                    
