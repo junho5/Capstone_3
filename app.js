@@ -51,6 +51,7 @@ app.get('/login',(req,res)=>{
 app.get('/join',(req,res)=>{
     res.render('join');
 });
+
 app.get('/search',(req,res)=>{
     res.redirect('/pasing/' + 1)
 });
