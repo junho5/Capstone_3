@@ -5,18 +5,18 @@ block content
         #main2.clearfix
             #content 
                 .login-wrap
-                    form#loginForm(action="/login")
+                    form#loginForm(action='admit' method='post') 
                         .id-wrap
-                            input#id-input(type="text")
+                            input#id-input(type='text' name='web_id')
                             span.phTxt_id 아이디(Id)
                         .id-error
                         .pw-wrap
-                            input#pw-input(type="password")
+                            input#pw-input(type='password' name='web_password')
                             span.phTxt_pw 비밀번호(Password)
                         .pw-error
                         .loginBtn-wrap
-                            button#loginBtn(type="submit") 로그인
+                            button#loginBtn(type='submit') 로그인
                         .joinBtn-wrap
-                            a(href="/join") 
-                                button#joinBtn(type="button") 회원가입
-    script(src="/login.js")
+                            a(href='/join') 
+                                button#joinBtn(type='button') 회원가입
+    //- script(src='/login.js')
