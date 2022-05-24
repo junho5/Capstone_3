@@ -5,27 +5,27 @@ block content
         #main2.clearfix
             #content
                 .join-wrap
-                    form#joinForm(method="post")
+                    form#joinForm(action='new_user' method='post')
                         .id-info
                             p 8~20자의 영어, 숫자만 가능합니다. 
                         .id-wrap
-                            input#id-input(type="text")
+                            input#id-input(type='text' name='web_id')
                             span#phTxt_id 아이디를 입력해주세요.
                         .join-id-error
                         .pw-info
                             p 8~20자의 영어, 숫자, 특수문자만 가능합니다.
                         .pw-wrap
-                            input#pw-input(type="password")
+                            input#pw-input(type='password' name='web_password')
                             span#phTxt_pw 비밀번호를 입력해주세요.
                         .join-pw-error
                         .pw-wrap
-                            input#pw-re-input(type="password")
+                            input#pw-re-input(type='password' name='web_password_check')
                             span#phTxt_re_pw 비밀번호를 다시 입력해주세요.
                         .join-pw-re-error
                         .email-wrap
-                            input#email-input(type="password")
+                            input#email-input(type='text' name='email')
                             span#phTxt_email 이메일을 입력해주세요.
                         .email-error
                         .joinBtn-wrap
-                            button#joinBtn(type="submit") 회원가입
-                script(src="/join.js")
+                            button#joinBtn(type='submit') 회원가입
+                //- script(src='/join.js')

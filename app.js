@@ -20,7 +20,6 @@ module.exports = s3;
 // db
 var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
-
 db_config.connect(conn);
 
 // import routers
