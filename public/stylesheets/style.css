@@ -101,6 +101,110 @@ section{
 #info2{
     padding-top: 10%;
 }
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    
+}
+
+/*전체 감싸기 */
+.wrap{
+    height: 100%;
+}
+
+/* navbar부분 관련 css */
+.header{
+    height: 12%;
+}
+#navbar{
+    height: 12%;
+
+    background-color: rgb(74,74,74);
+}
+#bar{
+    height: 100%;
+}
+#logoDiv{
+    height: 100%;
+}
+#menu{
+    width: 100%;
+}
+#imgLogo{
+    height: 100%;
+}
+#tt{
+    color: rgb(105,193,129);
+    font-size: 25px;
+    
+}
+
+
+
+/*  헤더 아래부분 부터 푸터 윗부분까지 Layout 선언하고 짜는게 좋을 듯 */
+#main{
+    height:78%;
+    padding-bottom:1em;    
+}
+#main2{
+    height: 100%;
+}
+#content{
+    height:95%;
+    padding-top: 5%;
+}    
+/* footer 관련 css */
+
+.footer {
+    height: 10%;
+    color: #aaa;
+    border-top: .05rem solid #e5e5e5; 
+}
+.foot{
+    text-align: center;
+}
+
+/* 메인페이지(홈화면)관련 css */
+.mainImg{
+    padding-top: 5%;
+    max-width: 100%;
+    object-fit: cover;
+}
+#recommend{
+    
+    color: red;
+}
+#recom{
+    padding-top: 5%;
+}
+
+/* about Us 관련 css */
+
+.logo{
+    height: 40%;
+}
+.info{
+    height: 70%;
+    padding-top: 20%;
+}
+#img1{
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+}
+#info2{
+    padding-top: 10%;
+}
+
+
+
+/* recommend 첫페이지 관련 화면 */
+#go{
+    color: red;
+}
+
 /* ------------------Login---------------------- */
 .login-wrap{
     position: relative;
@@ -171,6 +275,12 @@ section{
     cursor: text;
 }
 /* --------------join---------------- */
+.name-wrap{
+    position: relative;
+    width: 230px;
+    height: 50px;
+    margin-bottom: 20px;
+}
 .join-wrap{
     position: relative;
     width: 100%;
@@ -187,7 +297,7 @@ section{
     height: 50px;
     margin-bottom: 20px;
 }
-#pw-re-input,#email-input{
+#pw-re-input,#email-input,#name-input{
     display: block;
     font-size: 15px;
     width: 100%;
@@ -199,7 +309,7 @@ section{
     border-radius: 3px;
     outline: 0;
 }
-#phTxt_id, #phTxt_pw, #phTxt_re_pw,#phTxt_email{
+#phTxt_id, #phTxt_pw, #phTxt_re_pw,#phTxt_email,#phTxt_name{
     position: absolute;
     top: 50%; left: 10px;
     transform: translate(0, -50%);

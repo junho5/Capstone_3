@@ -6,6 +6,9 @@ block content
             #content
                 .join-wrap
                     form#joinForm(action='new_user' method='post')
+                        .name-wrap
+                            input#name-input(type="text" name='user_name')
+                            span#phTxt_name 이름을 입력해주세요.
                         .id-info
                             p 8~20자의 영어, 숫자만 가능합니다. 
                         .id-wrap
@@ -33,12 +36,14 @@ block content
         const pwInput = document.querySelector("#pw-input");
         const pwReInput = document.querySelector("#pw-re-input");
         const emailInput = document.querySelector("#email-input");
+        const nameInput = document.querySelector("#name-input");
         const joinBtn = document.querySelector("#joinBtn");
 
         const ph_id = document.querySelector("#phTxt_id");
         const ph_pw = document.querySelector("#phTxt_pw");
         const ph_re_pw = document.querySelector("#phTxt_re_pw");
         const ph_email = document.querySelector("#phTxt_email");
+        const ph_name = document.querySelector("#phTxt_name");
         const ph_style_set = ph_id.style;
 
         emInput.addEventListener('focus', (e)=>{
@@ -86,18 +91,14 @@ block content
                 e.target.parentElement.children[1].style = ph_style_set;
             }
         });
-        //- ph_id.addEventListener('click', (e)=>{
-        //-     e.target.parentElement.children[0].focus();
-        //- });
-        //- ph_pw.addEventListener('click', (e)=>{
-        //-     e.target.parentElement.children[0].focus();
-        //- });
-        //- ph_re_pw.addEventListener('click', (e)=>{
-        //-     e.target.parentElement.children[0].focus();
-        //- });
-        //- ph_email.addEventListener('click', (e)=>{
-        //-     e.target.parentElement.children[0].focus();
-        //- });
-        //- joinBtn.addEventListener('click', (e)=>{
-        //-     e.preventDefault();
-        //- });
+        nameInput.addEventListener('focus', (e)=>{
+            e.target.parentElement.children[1].style.fontSize = '9px';
+            e.target.parentElement.children[1].style.top = '12px';
+            e.target.parentElement.children[1].style.left = '7px';
+        });
+
+        nameInput.addEventListener('blur', (e)=>{
+            if(nameInput.value === ''){
+                e.target.parentElement.children[1].style = ph_style_set;
+            }
+        });

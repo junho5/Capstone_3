@@ -48,12 +48,13 @@ router.post('/new_user', function(req, res) {
     var web_password = req.body.web_password;
     var web_password_check = req.body.web_password_check;
     var email = req.body.email;
+    var user_name = req.body.user_name;
     console.log(web_id, web_password, email);
     if (web_id && web_password && email) {
         conn.query('SELECT * FROM user WHERE web_id = ? AND web_password = ? AND email = ?', [web_id, web_password, email], function(error, data, fields) {
             if (error) throw error;
             if (data.length <= 0 && web_password==web_password_check) {
-                conn.query('INSERT INTO user (web_id, web_password, email) VALUES(?,?,?)', [web_id, web_password, email],
+                conn.query('INSERT INTO user (web_id, web_password, email, user_name) VALUES(?,?,?,?)', [web_id, web_password, email, user_name],
                 function (error, data) {
                     if (error)
                     console.log(error);
