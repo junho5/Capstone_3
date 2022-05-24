@@ -20,9 +20,9 @@ router.get('/login',(req,res)=>{
 });
 router.post('/admit', (req, res) => {
     var web_id = req.body['web_id'];
-    var web_web_password = req.body['web_web_password'];
-    if (web_id &&  web_web_password){
-        conn.query('select * from user where web_id=? and web_web_password=?', [web_id,web_web_password], (err, data) => {
+    var web_password = req.body['web_password'];
+    if (web_id &&  web_password){
+        conn.query('select * from user where web_id=? and web_password=?', [web_id,web_password], (err, data) => {
             if (err) throw err;
             if (data.length > 0 ){
                 res.redirect('main')
@@ -60,17 +60,17 @@ router.post('/new_user', function(req, res) {
                     else
                     console.log(data);
                 });
-                  res.send('<script type="text/javascript">alert("회원가입을 환영합니다!"); document.location.href="/";</script>');    
+                  res.send('<script type="text/javascript">alert("회원가입을 환영합니다!"); document.location.href="/login";</script>');    
             } else if(web_password!=web_password_check){                
-                res.send('<script type="text/javascript">alert("입력된 비밀번호가 서로 다릅니다."); document.location.href="/register";</script>');    
+                res.send('<script type="text/javascript">alert("입력된 비밀번호가 서로 다릅니다."); document.location.href="/join";</script>');    
             }
             else {
-                res.send('<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); document.location.href="/register";</script>');    
+                res.send('<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); document.location.href="/join";</script>');    
             }            
             res.end();
         });
     } else {
-        res.send('<script type="text/javascript">alert("모든 정보를 입력하세요"); document.location.href="/register";</script>');    
+        res.send('<script type="text/javascript">alert("모든 정보를 입력하세요"); document.location.href="/join";</script>');    
         res.end();
     }
 });
