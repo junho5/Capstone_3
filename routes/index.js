@@ -14,7 +14,7 @@ router.get('/main',(req,res)=>{
     res.render('main');
 });
 
-// 로그인 관련 라우터
+// 로그인 관련 라우터 (passport)
 router.get('/login',(req,res)=>{
     res.render('login');
 });
