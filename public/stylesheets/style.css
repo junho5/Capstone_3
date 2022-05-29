@@ -109,97 +109,6 @@ body{
     
 }
 
-/*전체 감싸기 */
-.wrap{
-    height: 100%;
-}
-
-/* navbar부분 관련 css */
-.header{
-    height: 12%;
-}
-#navbar{
-    height: 12%;
-
-    background-color: rgb(74,74,74);
-}
-#bar{
-    height: 100%;
-}
-#logoDiv{
-    height: 100%;
-}
-#menu{
-    width: 100%;
-}
-#imgLogo{
-    height: 100%;
-}
-#tt{
-    color: rgb(105,193,129);
-    font-size: 25px;
-    
-}
-
-
-
-/*  헤더 아래부분 부터 푸터 윗부분까지 Layout 선언하고 짜는게 좋을 듯 */
-#main{
-    height:78%;
-    padding-bottom:1em;    
-}
-#main2{
-    height: 100%;
-}
-#content{
-    height:95%;
-    padding-top: 5%;
-}    
-/* footer 관련 css */
-
-.footer {
-    height: 10%;
-    color: #aaa;
-    border-top: .05rem solid #e5e5e5; 
-}
-.foot{
-    text-align: center;
-}
-
-/* 메인페이지(홈화면)관련 css */
-.mainImg{
-    padding-top: 5%;
-    max-width: 100%;
-    object-fit: cover;
-}
-#recommend{
-    
-    color: red;
-}
-#recom{
-    padding-top: 5%;
-}
-
-/* about Us 관련 css */
-
-.logo{
-    height: 40%;
-}
-.info{
-    height: 70%;
-    padding-top: 20%;
-}
-#img1{
-    height: 100%;
-    width: 100%;
-    vertical-align: middle;
-}
-#info2{
-    padding-top: 10%;
-}
-
-
-
 /* recommend 첫페이지 관련 화면 */
 #go{
     color: red;
@@ -326,11 +235,6 @@ p{
     color:black;
 }
 
-
-/* recommend 첫페이지 관련 화면 */
-#go{
-    color: red;
-}
 /* input 페이지 */
 
 #input_form{
@@ -445,9 +349,75 @@ p{
 #plant_fruit{
     margin-left: 2%;
 }
-.pager{
-    display: inline-block;
+
+.plant_name{
+    text-align: center;
 }
-.pager li{
-    display: inline;
+.plnat_rank{
+    text-align: center;
+}
+.plant_image{
+    padding-top: 1%;
+    text-align: center;
+}
+.plant_name > a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.results_item{
+    display: none;
+
+}
+.results_item.active{
+    display: block;
+}
+
+#myform fieldset{
+    text-align: center;
+    /* display: inline-block;  */
+    direction: rtl;
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#myform label{
+    font-size: 5em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgb(105,193,129); /* 마우스 호버 */
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgb(105,193,129); /* 마우스 호버 뒤에오는 이모지들 */
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgb(105,193,129);; /* 마우스 클릭 체크 */
+}
+
+
+#myform fieldset legend{
+    text-align: center;
+}
+
+
+
+
+#my.pagination > .active > a, 
+#my.pagination > .active > span, 
+#my.pagination > .active > a:hover, 
+#my.pagination > .active > span:hover, 
+#my.pagination > .active > a:focus, 
+#my.pagination > .active > span:focus {
+  background: rgb(25, 135, 84);
+  border-color:rgb(25, 135, 84);
+}
+.page-link{
+    color: rgb(25, 135, 84);
+
 }
