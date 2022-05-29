@@ -6,6 +6,8 @@ const app = express();
 const path = require('path');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+const PythonShell = require('python-shell');
+
 const mysql = require('mysql');  // mysql 모듈 로드
 const conn = {  // mysql 접속 설정
     host: "plant-db.cjqrer98lofr.ap-northeast-2.rds.amazonaws.com",
@@ -37,12 +39,45 @@ app.get('/recommend',(req,res)=>{
 app.get('/recommend/input',(req,res)=>{
     res.render('input');
 });
-app.post('/recommend/input',(req,res)=>{
+app.get('/recommend/output',(req,res)=>{
     console.log(req.body);
-    res.send(req.body);
-    res.end();
+    var inputQuery = req.query
+    var sql = "SELECT * FROM plant"
+    connection.query(sql, function (err, inputData) {
+        if (err) {
+            console.log(err +"mysql 조회 실패");
+            return
+        }else{
+            var options = {
+                mode: 'text',
+                pythonPath: '',
+                pythonOptions: ['-u'],
+                scriptPath: 'public/',
+                args: ['value1', JSON.stringify({inputQuery}), JSON.stringify({inputData})]
+              };
+            //   console.log(inputData)
+            PythonShell.PythonShell.run('test.py', options, function (err, results) {
+                if (err) {
+                    console.log(err);
+                }else {
+                    res.render('output',{
+                        Data: JSON.parse(results)});
+                    console.log(JSON.parse(results));
+                }
+          });
+
+        }
+    });    
+});
+
+app.post('/recommend/output',(req,res)=>{
+    // backURL=req.header()
+    console.log(req.body);
+    //평가점수 db 처리 할 부분.
+    res.send(`<script type="text/javascript">alert("평가 완료!"); window.location = document.referrer;; </script>`);
     
 });
+
 app.get('/login',(req,res)=>{
     res.render('login');
 });

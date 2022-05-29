@@ -6,7 +6,7 @@ block content
             #main2.clearfix
                 #content 
                     p.fs-4.text-center.border  식물을 키울 장소의 환경에 맞게 선택지를 골라주세요
-                    form#input_form.row.align-items-center(method = 'post')
+                    form#input_form.row.align-items-center(method = 'get', action='/recommend/output' onsubmit="return inputCheck();")
                         .plant_water.col-sm-6
                             .ask
                                 h3.fs-4.text-center 물 관리 난이도: 높을수록 관리 난이도 올라가요
@@ -23,6 +23,7 @@ block content
                                 input#plant_water(type = 'radio' name = 'plant_water' value = "4")
                                 label#plant_water.form-check-label(for='plant_water4')
                                     | 4
+
                                 
                                     
                         .plant_temperature.col-sm-6
@@ -52,6 +53,7 @@ block content
                                 input#plant_height(type = 'radio' name = 'plant_height' value = "175")
                                 label#plant_height.form-check-label(for='flexRadioDefault1')
                                     | 150이상
+                            .temp_message
                                 
                         .plant_width.col-sm-6
                             .ask  
@@ -77,29 +79,29 @@ block content
                                     | 150이상
                                 
                                  
-                        .plant_flower.col-sm-6
-                            .ask
-                                h3.fs-4.text-center 꽃의 유무
-                            .flower 
-                                input#plant_flower(type = 'radio' name = 'plant_flower' value = "1")
-                                label#plant_flower.form-check-label(for='flexRadioDefault1')
-                                    | 있음
-                                input#plant_flower(type = 'radio' name = 'plant_flower' value = "0")
-                                label#plant_flower.form-check-label(for='flexRadioDefault1')
-                                    | 없음
+                        //- .plant_flower.col-sm-6
+                        //-     .ask
+                        //-         h3.fs-4.text-center 꽃의 유무
+                        //-     .flower 
+                        //-         input#plant_flower(type = 'radio' name = 'plant_flower' value = "1")
+                        //-         label#plant_flower.form-check-label(for='flexRadioDefault1')
+                        //-             | 있음
+                        //-         input#plant_flower(type = 'radio' name = 'plant_flower' value = "0")
+                        //-         label#plant_flower.form-check-label(for='flexRadioDefault1')
+                        //-             | 없음
                                 
 
                         .plant_light.col-sm-6
                             .ask 
                                 h3.fs-4.text-center 배치장소를 선택해주세요.
                             .light 
-                                input#plant_light(type = 'radio' name = 'plant_light' value ='300')
+                                input#plant_light(type = 'radio' name = 'plant_light' value ='3')
                                 label#plant_light.form-check-label(for='flexRadioDefault1')
                                     | 배란다
-                                input#plant_light(type = 'radio' name = 'plant_light' value ='300')
+                                input#plant_light(type = 'radio' name = 'plant_light' value ='2')
                                 label#plant_light.form-check-label(for='flexRadioDefault1')
                                     | 창측
-                                input#plant_light(type = 'radio' name = 'plant_light' value ='300')
+                                input#plant_light(type = 'radio' name = 'plant_light' value ='1')
                                 label#plant_light.form-check-label(for='flexRadioDefault1')
                                     | 실내
                                 
@@ -110,27 +112,29 @@ block content
                             .ask
                                 h3.fs-4.text-center 독성 유무
                             .toxicity 
-                                label#plant_toxicity.form-check-label(for='flexRadioDefault1')
-                                    | 있음
                                 input#plant_toxicity(type = 'radio' name = 'plant_toxicity' value = "1")
                                 label#plant_toxicity.form-check-label(for='flexRadioDefault1')
-                                    | 없음
-                                input#plant_toxicity(type = 'radio' name = 'plant_toxicity' value = "0")
-                        .plant_fruit.col-sm-6
-                            .ask 
-                                h3.fs-4.text-center 열매 유무
-                            .fruit
-                                input#plant_fruit(type = 'radio' name = 'plant_fruit' value = "1")
-                                label#plant_fruit.form-check-label(for='flexRadioDefault1')
                                     | 있음
-                                input#plant_fruit(type = 'radio' name = 'plant_fruit' value = "0")
-                                label#plant_fruit.form-check-label(for='flexRadioDefault1')
+                                input#plant_toxicity(type = 'radio' name = 'plant_toxicity' value = "0")
+                                label#plant_toxicity.form-check-label(for='flexRadioDefault1')
                                     | 없음
                                 
+                        //- .plant_fruit.col-sm-6
+                        //-     .ask 
+                        //-         h3.fs-4.text-center 열매 유무
+                        //-     .fruit
+                        //-         input#plant_fruit(type = 'radio' name = 'plant_fruit' value = "1")
+                        //-         label#plant_fruit.form-check-label(for='flexRadioDefault1')
+                        //-             | 있음
+                        //-         input#plant_fruit(type = 'radio' name = 'plant_fruit' value = "0")
+                        //-         label#plant_fruit.form-check-label(for='flexRadioDefault1')
+                        //-             | 없음
+                                
 
-                        button.btn.btn-primary(type='submit') 입력 완료
+                        button.btn.btn-outline-success(type='submit') 입력 완료
+    
 
-                        
+    script(src='/input.js')
 
 
                         
