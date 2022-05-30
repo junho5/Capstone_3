@@ -1,9 +1,30 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
+
+//--------------------------------------------------------
+const session = require('express-session')
+const passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+//--------------------------------------------------------
 
 var db_config = require('../config/database.js');
 var conn = db_config.init();
+//--------------------------------------------------------
+router.use(
+    session({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.COOKIE_SECRET,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+        },
+        name: 'login_maintain',
+    })
+);
+router.use(passport.initialize());
+router.use(passport.session());
+//--------------------------------------------------------
 
 // 메인화면 관련 라우터
 router.get('/',(req,res)=>{
@@ -18,25 +39,74 @@ router.get('/main',(req,res)=>{
 router.get('/login',(req,res)=>{
     res.render('login');
 });
-router.post('/admit', (req, res) => {
-    var web_id = req.body.web_id;
-    var web_password = req.body.web_password;
-    if (web_id &&  web_password){
-        conn.query('select * from user where web_id=? and web_password=?', [web_id,web_password], (err, data) => {
-            if (err) throw err;
-            if (data.length > 0 ){
-                res.redirect('main')
-                res.end();
-            }else {              
-                res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); document.location.href="/login";</script>');    
-            }            
-        });
-    } else {        
-        res.send('<script type="text/javascript">alert("web_id과 web_password를 입력하세요!"); document.location.href="/login";</script>');    
-        res.end();
-    }
+
+//--------------------------------------------------------
+passport.serializeUser(function(user, done) {
+    console.log("serializeUser ", user)
+    done(null, user.web_id);
+  });
+  
+passport.deserializeUser(function(id, done) {
+    console.log("deserializeUser id ", id)
+    var userinfo;
+    var sql = 'SELECT * FROM user WHERE web_id=?';
+    conn.query(sql , [id], function (err, result) {
+    if(err) console.log('mysql 에러');     
+    
+    console.log("deserializeUser mysql result : " , result);
+    var json = JSON.stringify(result[0]);
+    userinfo = JSON.parse(json);
+    done(null, userinfo);
+    })    
 });
 
+passport.use(new LocalStrategy({
+    usernameField: 'web_id',
+    passwordField: 'web_password'
+  },
+  function(username, password, done) {
+    var sql = 'SELECT * FROM user WHERE web_id=? AND web_password=?';
+    conn.query(sql , [username, password], function (err, result) {
+      if(err) console.log('mysql 에러');  
+
+      // 입력받은 ID와 비밀번호에 일치하는 회원정보가 없는 경우   
+      if(result.length === 0){
+        console.log("결과 없음");
+        return done(null, false, { message: 'Incorrect' });
+      }else{
+        console.log(result);
+        var json = JSON.stringify(result[0]);
+        var userinfo = JSON.parse(json);
+        console.log("userinfo " + userinfo);
+        return done(null, userinfo);  // result값으로 받아진 회원정보를 return해줌
+      }
+    })
+  }
+));
+router.post('/admit',passport.authenticate('local', { 
+    successRedirect: '/',
+    failureRedirect: '/join'
+    })
+);
+//--------------------------------------------------------
+// router.post('/admit', (req, res) => {
+//     var web_id = req.body.web_id;
+//     var web_password = req.body.web_password;
+//     if (web_id &&  web_password){
+//         conn.query('select * from user where web_id=? and web_password=?', [web_id,web_password], (err, data) => {
+//             if (err) throw err;
+//             if (data.length > 0 ){
+//                 res.redirect('main')
+//                 res.end();
+//             }else {              
+//                 res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); document.location.href="/login";</script>');    
+//             }            
+//         });
+//     } else {        
+//         res.send('<script type="text/javascript">alert("web_id과 web_password를 입력하세요!"); document.location.href="/login";</script>');    
+//         res.end();
+//     }
+// });
 
 
 // 회원가입 관련 라우터
