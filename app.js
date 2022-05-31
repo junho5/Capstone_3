@@ -45,13 +45,6 @@ app.use('/',loginRouter);
 
 
 app.get('/aboutus',(req,res)=>{
-    testQuery = "SELECT * FROM user";
-    conn.query(testQuery, function (err, results, fields) {
-    if (err) {
-        console.log(err);
-    }
-    console.log(results);
-});
     res.render('aboutUs');
 });
 
