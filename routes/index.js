@@ -88,7 +88,7 @@ router.post('/admit',passport.authenticate('local', {
     failureRedirect: '/join'
     })
 );
-//-------------------------------------------------------- 일단 주석
+//--------------------------------------------------------
 // router.post('/admit', (req, res) => {
 //     var web_id = req.body.web_id;
 //     var web_password = req.body.web_password;
