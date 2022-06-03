@@ -169,7 +169,7 @@ app.get('/detail/:id',(req,res)=>{
     });
 
 });
-
+// comment 부분 추가 예정
 
 // 404 에러처리 미들웨어 (사용자 요청이라서 500위에 작성)
 app.use((req, res, next) => {
