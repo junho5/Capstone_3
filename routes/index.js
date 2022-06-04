@@ -35,6 +35,12 @@ router.get('/main',(req,res)=>{
     res.render('main');
 });
 
+router.get('/aboutus',(req,res)=>{
+    // 요 방법으로 로그인 아닌거 구분예정
+    console.log(req.isAuthenticated())
+    res.render('aboutUs');
+});
+
 // 로그인 관련 라우터
 router.get('/login',(req,res)=>{
     res.render('login');

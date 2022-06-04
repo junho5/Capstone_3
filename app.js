@@ -44,9 +44,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/',loginRouter);
 
 
-app.get('/aboutus',(req,res)=>{
-    res.render('aboutUs');
-});
+// app.get('/aboutus',(req,res)=>{
+//     res.render('aboutUs');
+// });
 
 app.get('/recommend',(req,res)=>{
     res.render('recommend');
