@@ -1,8 +1,10 @@
 import json
 import sys
+import numpy as np
 import pandas as pd
 from pandas import json_normalize
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.cluster import KMeans
 
 inputQuery = json.loads(sys.argv[2])['inputQuery']
 inputData = json.loads(sys.argv[3])['inputData']
@@ -21,8 +23,10 @@ scaler = MinMaxScaler()
 scaler.fit(subset2)
 subset2 = scaler.transform(subset2)
 subset2 = pd.DataFrame(subset2,columns = col)
-
-df1 = pd.concat([subset2,subset3], axis = 1)
+kmeans = KMeans(n_clusters=4, random_state=0).fit(subset2)
+arr = np.array(kmeans.labels_)
+subset2['cluster_num'] = arr
+df1 = subset2
 df2 = df1.groupby('cluster_num').mean()
 df1 = pd.concat([df1,subset1], axis = 1)
 

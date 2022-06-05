@@ -29,6 +29,35 @@ app.set('view engine', 'pug');
 app.get('/',(req,res)=>{
     res.render('main');
 });
+app.get('/admin', (req,res)=>{
+    var sql = "select AUTO_INCREMENT as id_num from information_schema.tables where table_name = 'plant' AND table_schema = DATABASE()"
+    connection.query(sql, function(err, id_num){
+        if (err) {
+            console.log(err +"mysql 조회 실패");
+            return
+        }else{
+            var sql = "select * from plant"
+            connection.query(sql, function(err, data){
+                if (err) {
+                    console.log('mysql 조회 실패');
+
+                }else{
+                    res.render('admin',{id_num: id_num, data: data});
+                    // console.log(data);
+
+                }
+            })
+
+        }
+    });
+    
+
+});
+app.post('/admin', (req,res)=>{
+    res.send(req.body);
+    console.log(req.body);
+    // res.redirect('/admin')
+})
 app.get('/aboutus',(req,res)=>{
     res.render('aboutUs');
 });
