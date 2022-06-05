@@ -14,7 +14,7 @@ router.use(
     session({
         resave: false,
         saveUninitialized: false,
-        secret: process.env.COOKIE_SECRET,
+        secret: "capstone",
         cookie: {
             httpOnly: true,
             secure: false,
