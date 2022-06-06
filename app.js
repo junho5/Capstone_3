@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -7,6 +5,11 @@ const path = require('path');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 const PythonShell = require('python-shell');
+const aws = require('aws-sdk')
+const multer = require('multer')
+const multerS3 = require('multer-s3');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const mysql = require('mysql');  // mysql 모듈 로드
 const conn = {  // mysql 접속 설정
@@ -18,7 +21,21 @@ const conn = {  // mysql 접속 설정
 };
 const connection = mysql.createConnection(conn); // DB 커넥션 생성
 connection.connect();   // DB 접속
+aws.config.loadFromPath(__dirname + '/awsconfig.json');
+const s3 = new aws.S3();
 
+const upload = multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: 'some-bucket',
+      metadata: function (req, file, cb) {
+        cb(null, {fieldName: file.fieldname});
+      },
+      key: function (req, file, cb) {
+        cb(null, Date.now().toString())
+      }
+    })
+  })
 app.set('port', process.env.Port || 3000);
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,14 +67,29 @@ app.get('/admin', (req,res)=>{
 
         }
     });
-    
-
 });
-app.post('/admin', (req,res)=>{
-    res.send(req.body);
+app.post('/admin',upload.single('file'),(req,res)=>{
     console.log(req.body);
-    // res.redirect('/admin')
-})
+    console.log(req.file,req.body);
+    var sql = "INSERT INTO plant(plant_num,cluster_num,plant_name,light,temp,water,height,width,poison,image,comment) VALUES(null,1,?,?,?,?,?,?,?,?,'comment')"
+    connection.query(sql,[req.body.name,parseInt(req.body.light),parseInt(req.body.temp),parseInt(req.body.water),parseInt(req.body.height),parseInt(req.body.width), parseInt(req.body.poison),req.body.image],function(err,rows){
+      if(err){
+        console.log("upload 실패");
+      } else{
+        console.log(rows.insertId);
+        res.redirect('/upload');
+
+      }
+      
+    })
+});
+
+
+// app.post('/admin', (req,res)=>{
+//     res.send(req.body);
+//     console.log(req.body);
+//     // res.redirect('/admin')
+// });
 app.get('/aboutus',(req,res)=>{
     res.render('aboutUs');
 });
@@ -180,11 +212,20 @@ app.get('/detail/:id',(req,res)=>{
     var queryString = 'select * from plant where plant_num = ?';
     connection.query(queryString,[req.params.id],(error,result)=>{
         console.log(result);
-        res.render('detail',{
-            data:result[0]
-        });
+        var sql = "select * from comment where plant_num = ? "
+        connection.query(sql,[parseInt(req.params.id)], (err,comments)=>{
+            console.log(comments);
+            res.render('detail',{
+                data:result[0],
+                comments:comments
+            });
+        })
+        
     });
 
+});
+app.post('/test',(req,res)=>{
+    res.send(req.body);
 });
 
 

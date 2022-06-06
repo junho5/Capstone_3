@@ -5,133 +5,81 @@ block content
         #main.container
             #main2.clearfix
                 #content 
-                    p.fs-4.text-center.border  식물을 키울 장소의 환경에 맞게 선택지를 골라주세요
+                    p.fs-4.text-center  식물을 키울 장소의 환경에 맞게 선택지를 골라주세요
                     form#input_form.row.align-items-center(method = 'get', action='/recommend/output' onsubmit="return inputCheck();")
-                        .plant_water.col-sm-6
-                            .ask
-                                h3.fs-4.text-center 물 관리 난이도: 높을수록 관리 난이도 올라가요
-                            .water
-                                input#plant_water(type = 'radio' name = 'plant_water' value = "1")
-                                label#plant_water.form-check-label(for='plant_water1')
-                                    | 1
-                                input#plant_water(type = 'radio' name = 'plant_water' value = "2")
-                                label#plant_water.form-check-label(for='plant_water2')
-                                    | 2
-                                input#plant_water(type = 'radio' name = 'plant_water' value = "3")
-                                label#plant_water.form-check-label(for='plant_water3')
-                                    | 3
-                                input#plant_water(type = 'radio' name = 'plant_water' value = "4")
-                                label#plant_water.form-check-label(for='plant_water4')
-                                    | 4
-
+                        .plant_water.col-sm-6.mb3
+                            label.form-label 원하는 물주기 기준을 선택하세요.
+                            select.form-select(name ='plant_water')
+                                option(selected value=1) 흙 속까지 완전히 마르면 충분히 물을 줌
+                                option(value=2) 흙 겉면이 마르면 충분히 물을 줌
+                                option(value=3) 항상 촉촉하게 물을 줌(물에 잠기지 않도록 주의)
+                                option(value=4) 항상 촉촉하게 물을 줌(수경식물)  
                                 
                                     
                         .plant_temperature.col-sm-6
-                            .ask
-                                h3.fs-4.text-center 키울 장소의 온도를 입력해주세요.
-                            .temperature
-                                input#plant_temperature(type = 'number' name = 'plant_temperature')
+                            label.form-label  키울 장소의 최저 온도(오전 11시 기준)를 입력해주세요. 
+                            select.form-select(name = 'plant_temperature')
+                                option(selected value=5) 5℃
+                                option(value = 6) 6℃
+                                option(value = 7) 7℃
+                                option(value = 8) 8℃
+                                option(value = 9) 9℃
+                                option(value = 10) 10℃
+                                option(value = 11) 11℃
+                                option(value = 12) 12℃
+                                option(value = 13) 13℃
+                                option(value = 14) 14℃
+                                option(value = 15) 15℃
+                                option(value = 16) 16℃
+                                option(value = 17) 17℃
+                                option(value = 18) 18℃
+                                option(value = 19) 19℃
+                                option(value = 20) 20℃
+                                option(value = 21) 21℃
+                                option(value = 22) 22℃
+                                option(value = 23) 23℃
+                                option(value = 24) 24℃
+                                option(value = 25) 25℃
+                               
+
                         .plant_height.col-sm-6
-                            .ask
-                                h3.fs-4.text-center 식물의 높이를 선택해주세요.
-                            .height
-                                input#plant_height(type = 'radio' name = 'plant_height' value = "15")
-                                label#plant_height.form-check-label(for='flexRadioDefault1')
-                                    | 0~30
-                                input#plant_height(type = 'radio' name = 'plant_height' value = "45")
-                                label#plant_height.form-check-label(for='flexRadioDefault1')
-                                    | 30~60
-                                input#plant_height(type = 'radio' name = 'plant_height' value = "75")
-                                label#plant_height.form-check-label(for='flexRadioDefault1')
-                                    | 60~90
-                                input#plant_height(type = 'radio' name = 'plant_height' value = "105")
-                                label#plant_height.form-check-label(for='flexRadioDefault1')
-                                    | 90~120
-                                input#plant_height(type = 'radio' name = 'plant_height' value = "135")
-                                label#plant_height.form-check-label(for='flexRadioDefault1')
-                                    | 120~150
-                                input#plant_height(type = 'radio' name = 'plant_height' value = "175")
-                                label#plant_height.form-check-label(for='flexRadioDefault1')
-                                    | 150이상
-                            .temp_message
+                            label.form-label 식물의 높이를 선택해주세요.
+                            select.form-select(name = 'plant_hight')
+                                option(selected value=15) 0(cm) ~ 30(cm)
+                                option(value=45) 31(cm) ~ 60(cm)
+                                option(value=75) 61(cm) ~ 90(cm)
+                                option(value=105) 91(cm) ~ 120(cm)
+                                option(value=135) 121(cm) ~ 150(cm)
+                                option(value=165) 150(cm) 이상
+                                
                                 
                         .plant_width.col-sm-6
-                            .ask  
-                                h3.fs-4.text-center 식물의 너비를 선택해주세요.
-                            .width 
-                                input#plant_width(type = 'radio' name = 'plant_width' value = "15")
-                                label#plant_width.form-check-label(for='flexRadioDefault1')
-                                    | 0~30
-                                input#plant_width(type = 'radio' name = 'plant_width' value = "45")
-                                label#plant_width.form-check-label(for='flexRadioDefault1')
-                                    | 30~60
-                                input#plant_width(type = 'radio' name = 'plant_width' value = "75")
-                                label#plant_width.form-check-label(for='flexRadioDefault1')
-                                    | 60~90
-                                input#plant_width(type = 'radio' name = 'plant_width' value = "105")
-                                label#plant_width.form-check-label(for='flexRadioDefault1')
-                                    | 90~120
-                                input#plant_width(type = 'radio' name = 'plant_width' value = "135")
-                                label#plant_width.form-check-label(for='flexRadioDefault1')
-                                    | 120~150
-                                input#plant_width(type = 'radio' name = 'plant_width' value = "175")
-                                label#plant_width.form-check-label(for='flexRadioDefault1')
-                                    | 150이상
-                                
-                                 
-                        //- .plant_flower.col-sm-6
-                        //-     .ask
-                        //-         h3.fs-4.text-center 꽃의 유무
-                        //-     .flower 
-                        //-         input#plant_flower(type = 'radio' name = 'plant_flower' value = "1")
-                        //-         label#plant_flower.form-check-label(for='flexRadioDefault1')
-                        //-             | 있음
-                        //-         input#plant_flower(type = 'radio' name = 'plant_flower' value = "0")
-                        //-         label#plant_flower.form-check-label(for='flexRadioDefault1')
-                        //-             | 없음
+                            label.form-label 식물의 높이를 선택해주세요.
+                            select.form-select(name = 'plant_width')
+                                option(selected value=15) 0(cm) ~ 30(cm)
+                                option(value=45) 31(cm) ~ 60(cm)
+                                option(value=75) 61(cm) ~ 90(cm)
+                                option(value=105) 91(cm) ~ 120(cm)
+                                option(value=135) 121(cm) ~ 150(cm)
+                                option(value=165) 150(cm) 이상
+                            
                                 
 
                         .plant_light.col-sm-6
-                            .ask 
-                                h3.fs-4.text-center 배치장소를 선택해주세요.
-                            .light 
-                                input#plant_light(type = 'radio' name = 'plant_light' value ='3')
-                                label#plant_light.form-check-label(for='flexRadioDefault1')
-                                    | 배란다
-                                input#plant_light(type = 'radio' name = 'plant_light' value ='2')
-                                label#plant_light.form-check-label(for='flexRadioDefault1')
-                                    | 창측
-                                input#plant_light(type = 'radio' name = 'plant_light' value ='1')
-                                label#plant_light.form-check-label(for='flexRadioDefault1')
-                                    | 실내
+                            label.form-label 배치장소를 선택해주세요.(광도 관련)
+                            select.form-select(name = 'plant_light')
+                                option(selected value=1) 실내(300lux~10000lux)
+                                option(value=2) 창측(800lux~10000lux)
+                                option(value=3) 배란다(1500lux~10000lux)
                                 
-                                
-                            
-                                                       
+                                             
                         .plant_toxicity.col-sm-6
-                            .ask
-                                h3.fs-4.text-center 독성 유무
-                            .toxicity 
-                                input#plant_toxicity(type = 'radio' name = 'plant_toxicity' value = "1")
-                                label#plant_toxicity.form-check-label(for='flexRadioDefault1')
-                                    | 있음
-                                input#plant_toxicity(type = 'radio' name = 'plant_toxicity' value = "0")
-                                label#plant_toxicity.form-check-label(for='flexRadioDefault1')
-                                    | 없음
-                                
-                        //- .plant_fruit.col-sm-6
-                        //-     .ask 
-                        //-         h3.fs-4.text-center 열매 유무
-                        //-     .fruit
-                        //-         input#plant_fruit(type = 'radio' name = 'plant_fruit' value = "1")
-                        //-         label#plant_fruit.form-check-label(for='flexRadioDefault1')
-                        //-             | 있음
-                        //-         input#plant_fruit(type = 'radio' name = 'plant_fruit' value = "0")
-                        //-         label#plant_fruit.form-check-label(for='flexRadioDefault1')
-                        //-             | 없음
-                                
+                            label.form-label 독성 유무를 선택해주세요.
+                            select.form-select(name= "plant_toxicity")
+                                option(value = 0) 독성 없음
+                                option(value = 1) 독성 있음
 
-                        button.btn.btn-outline-success(type='submit') 입력 완료
+                        button.btn.btn-outline-success.mb3(type='submit') 입력 완료
     
 
     script(src='/input.js')

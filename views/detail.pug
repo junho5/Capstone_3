@@ -5,7 +5,7 @@ block content
         #main.container
             #main2.clearfix
                 #content
-                    p.fs-4.text-center=data.plant_name
+                    p.fs-4.text-center=data.plant_name  
                     .text-center
                         img.img-fluid.text-center(src=data.image)
                         if (data.light ==1)
@@ -33,11 +33,29 @@ block content
                             p 독성 유무: 독성 없음. 
                         if (data.poison ==1)
                             p 독성 유무: 독성 있음. 
-                        .comment 
-                            p 댓글 보기
+                        .comment
+                            table.table.table-borderless 
+                                thead
+                                    tr 
+                                        th(scope = 'col') 댓글 번호
+                                        th(scope = 'col') 유저 아이디
+                                        th(scope = 'col') 댓글 내용
+                                tbody 
+                                    each comment in comments 
+                                        tr
+                                            td 댓글 번호 #{comment.comment_id}
+                                            td 유저 아이디 #{comment.user_id}
+                                            td 댓글 내용 #{comment.comment}
+                        
 
                         .comment_input
-                            p 댓글 쓰기
+                            form.row(action='/test' method='post')
+                                label.form-label 댓글 내용
+                                input.form-control(type='textarea' name='comments')
+                                input(type='hidden' name= 'plant_num' id = 'plant_num' value=data.plant_num )
+                                .input_button.d-grid.gap-2.col-12.mx-auto.mb-3
+                                    button.btn.btn-outline-success(type='submit') 댓글 추가
+                            
 
                     
                 

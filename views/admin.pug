@@ -7,7 +7,7 @@ block content
                 #content
                     .upload
                         p.fs-4.text-center 데이터 추가
-                        form.row(action='/admin' method='post')
+                        form.row(action='/admin' method='post' enctype='multipart/form-data')
                             .input_num.col-md-4.mb-3
                                 label.form-label 식물 번호
                                 input.form-control(type='number' name='num' readonly value = id_num[0].id_num)

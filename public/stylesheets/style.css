@@ -91,7 +91,10 @@ section{
 }
 .info{
     height: 70%;
-    padding-top: 20%;
+    padding-top: 20%;  
+}
+.infop{
+    word-break: keep-all;
 }
 #img1{
     height: 100%;
