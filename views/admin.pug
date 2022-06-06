@@ -1,0 +1,80 @@
+extends layout 
+
+block content 
+    section
+        #main.container
+            #main2.clearfix
+                #content
+                    .upload
+                        p.fs-4.text-center 데이터 추가
+                        form.row(action='/admin' method='post' enctype='multipart/form-data')
+                            .input_num.col-md-4.mb-3
+                                label.form-label 식물 번호
+                                input.form-control(type='number' name='num' readonly value = id_num[0].id_num)
+                            .input_name.col-md-4.mb-3
+                                label.form-label 식물 이름
+                                input.form-control(type='text' name='name')
+                            .input_light.col-md-4.mb-3
+                                label.form-label 광도
+                                select.form-select(name = 'light')
+                                    option(selected value=1) 300lux ~10000lux
+                                    option(value=2) 800lux ~10000lux
+                                    option(value=3) 1500lux ~10000lux  
+
+                                
+                            .input_temp.col-md-4.mb-3
+                                label.form-label 온도
+                                input.form-control(type='number' name='temp')
+                            .input_water.col-md-4.mb-3
+                                label.form-label 관수
+                                select.form-select(name ='water')
+                                    option(selected value=1) 흙 속까지 완전히 마르면 충분히 관수함
+                                    option(value=2) 흙 겉면이 마르면 충분히 관수함
+                                    option(value=3) 항상 촉촉하게 유지함(물에 잠기지 않도록 주의)
+                                    option(value=4) 항상 촉촉하게 유지(수경식물)  
+                            .input_height.col-md-4.mb-3
+                                label.form-label 높이
+                                input.form-control(type='number' name='height')
+                            .input_width.col-md-4.mb-3
+                                label.form-label 너비
+                                input.form-control(type='number' name='width')
+                            .input_poison.col-md-4.mb-3
+                                label.form-label 독성
+                                select.form-select(name = 'poison')
+                                    option(selected value=0) 독성 없음
+                                    option(value=1) 독성 있음
+                                
+                            .input_image.col-md-12.mb-3
+                                label.form-label 식물 이미지 경로
+                                input.form-control(type='text' name='image' value =  "https://plant-imageset.s3.ap-northeast-2.amazonaws.com/"+id_num[0].id_num+".jpeg"  readonly)
+                            .input_file.col-md-12.mb-3
+                                label.form-label 식물 사진
+                                input.form-control(type='file' name='file')
+                            .input_button.d-grid.gap-2.col-12.mx-auto.mb-3
+                                button.btn.btn-outline-success(type='submit') 추가하기
+                    .lookup
+                        p.fs-4.text-center 데이터 조회
+                        table.table.table-success.table-borderless 
+                            thead
+                                tr 
+                                    th(scope = 'col') 번호
+                                    th(scope = 'col') 이름
+                                    th(scope = 'col') 광도
+                                    th(scope = 'col') 온도
+                                    th(scope = 'col') 관수
+                                    th(scope = 'col') 높이
+                                    th(scope = 'col') 너비
+                                    th(scope = 'col') 독성
+                                    th(scope = 'col') 이미지 경로
+                            each i in data
+                                tbody 
+                                    tr 
+                                        td=i.plant_num
+                                        td=i.plant_name
+                                        td=i.light
+                                        td=i.temp
+                                        td=i.water
+                                        td=i.height
+                                        td=i.width
+                                        td=i.poison
+                                        td=i.image
