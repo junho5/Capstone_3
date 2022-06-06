@@ -40,7 +40,7 @@ const upload = multer({
         }
     )},
     }),
-  });
+});
 
 // db
 var db_config = require(__dirname + '/config/database.js');
