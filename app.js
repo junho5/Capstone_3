@@ -14,9 +14,9 @@ dotenv.config();
 
 // aws
 const s3 = new AWS.S3({
-    accessKeyId: 'AKIASFRLDP76B2R5IA75',
-    secretAccessKey: '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',
-    region: 'ap-northeast-2'
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
 });
 
 // upload
@@ -49,7 +49,6 @@ db_config.connect(conn);
 // import routers
 const loginRouter = require('./routes/index');
 
-
 const app = express();
 app.set('port', process.env.Port || 3000);
 app.set('view engine', 'pug');
@@ -67,9 +66,121 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/',loginRouter);
 
 // aboutUs 부분 -------------------------------------------
-app.get('/aboutus',(req,res)=>{
+app.get('/aboutUs',(req,res)=>{
     res.render('aboutUs');
 });
+//--------------------------------------------------------
+
+// detail 부분 -------------------------------------------
+app.get('/detail/:id',(req,res)=>{
+    console.log(req.params.id);
+    var queryString = 'select * from plant where plant_num = ?';
+    conn.query(queryString,[req.params.id],(error,result)=>{
+        console.log(result);
+        var sql = "select * from comment where plant_num = ? "
+        conn.query(sql,[parseInt(req.params.id)], (err,comments)=>{
+            console.log(comments);
+            res.render('detail',{
+                data:result[0],
+                comments:comments
+            });
+        })
+        
+    });
+
+});
+//--------------------------------------------------------
+
+// // recommend 부분 -----------------------------------------
+app.get('/recommend',(req,res)=>{
+    res.render('recommend');
+});
+app.get('/recommend/input',(req,res)=>{
+    res.render('input');
+});
+app.get('/recommend/output',(req,res)=>{
+    console.log(req.body);
+    var inputQuery = req.query
+    var sql = "SELECT * FROM plant"
+    conn.query(sql, function (err, inputData) {
+        if (err) {
+            console.log(err +"mysql 조회 실패");
+            return
+        }else{
+            var options = {
+                mode: 'text',
+                pythonPath: '',
+                pythonOptions: ['-u'],
+                scriptPath: 'public/',
+                args: ['value1', JSON.stringify({inputQuery}), JSON.stringify({inputData})]
+              };
+            //   console.log(inputData)
+            PythonShell.PythonShell.run('test.py', options, function (err, results) {
+                if (err) {
+                    console.log(err);
+                }else {
+                    res.render('output',{
+                        Data: JSON.parse(results)});
+                    console.log(JSON.parse(results));
+                }
+          });
+
+        }
+    });    
+});
+
+app.post('/recommend/output',(req,res)=>{
+    console.log(req.isAuthenticated())
+    if (req.isAuthenticated()){
+        console.log(req.body);
+        //평가점수 db 처리 할 부분.
+        res.send(`<script type="text/javascript">alert("평가 완료!"); window.location = document.referrer;; </script>`);
+    }else{
+        res.send('<script type="text/javascript">alert("로그인이 필요한 항목입니다."); document.location.href="/login";</script>');  
+    }
+    
+});
+// //--------------------------------------------------------
+
+// 관리자 부분 ----------------------------------------------
+app.get('/admin', (req,res)=>{
+    var sql = "select AUTO_INCREMENT as id_num from information_schema.tables where table_name = 'plant' AND table_schema = DATABASE()"
+    conn.query(sql, function(err, id_num){
+        if (err) {
+            console.log(err +"mysql 조회 실패");
+            return
+        }else{
+            var sql = "select * from plant"
+            conn.query(sql, function(err, data){
+                if (err) {
+                    console.log('mysql 조회 실패');
+
+                }else{
+                    res.render('admin',{id_num: id_num, data: data});
+                    // console.log(data);
+
+                }
+            })
+
+        }
+    });
+});
+app.post('/admin',upload.single('file'),(req,res)=>{
+    console.log(req.body);
+    console.log(req.file,req.body);
+    var sql = "INSERT INTO plant(plant_num,cluster_num,plant_name,light,temp,water,height,width,poison,image,comment) VALUES(null,1,?,?,?,?,?,?,?,?,'comment')"
+    conn.query(sql,[req.body.name,parseInt(req.body.light),parseInt(req.body.temp),parseInt(req.body.water),parseInt(req.body.height),parseInt(req.body.width), parseInt(req.body.poison),req.body.image],function(err,rows){
+      if(err){
+        console.log(err)
+        console.log("upload 실패");
+      } else{
+        console.log(rows.insertId);
+        res.redirect('/admin');
+
+      }
+      
+    })
+})
 //--------------------------------------------------------
 
 // recommend 부분 -----------------------------------------
@@ -186,67 +297,6 @@ app.get('/pasing/:cur',(req,res)=>{
         });
     });
 });
-//--------------------------------------------------------
-
-// detail 부분 -------------------------------------------
-app.get('/detail/:id',(req,res)=>{
-    console.log(req.params.id);
-    var queryString = 'select * from plant where plant_num = ?';
-    conn.query(queryString,[req.params.id],(error,result)=>{
-        console.log(result);
-        var sql = "select * from comment where plant_num = ? "
-        conn.query(sql,[parseInt(req.params.id)], (err,comments)=>{
-            console.log(comments);
-            res.render('detail',{
-                data:result[0],
-                comments:comments
-            });
-        })
-        
-    });
-
-});
-//--------------------------------------------------------
-
-
-// 관리자 부분 ----------------------------------------------
-app.get('/admin', (req,res)=>{
-    var sql = "select AUTO_INCREMENT as id_num from information_schema.tables where table_name = 'plant' AND table_schema = DATABASE()"
-    conn.query(sql, function(err, id_num){
-        if (err) {
-            console.log(err +"mysql 조회 실패");
-            return
-        }else{
-            var sql = "select * from plant"
-            conn.query(sql, function(err, data){
-                if (err) {
-                    console.log('mysql 조회 실패');
-
-                }else{
-                    res.render('admin',{id_num: id_num, data: data});
-                    // console.log(data);
-
-                }
-            })
-
-        }
-    });
-});
-app.post('/admin',upload.single('file'),(req,res)=>{
-    console.log(req.body);
-    console.log(req.file,req.body);
-    var sql = "INSERT INTO plant(plant_num,cluster_num,plant_name,light,temp,water,height,width,poison,image,comment) VALUES(null,1,?,?,?,?,?,?,?,?,'comment')"
-    conn.query(sql,[req.body.name,parseInt(req.body.light),parseInt(req.body.temp),parseInt(req.body.water),parseInt(req.body.height),parseInt(req.body.width), parseInt(req.body.poison),req.body.image],function(err,rows){
-      if(err){
-        console.log("upload 실패");
-      } else{
-        console.log(rows.insertId);
-        res.redirect('/upload');
-
-      }
-      
-    })
-})
 //--------------------------------------------------------
 
 // 404 에러처리 미들웨어 (사용자 요청이라서 500위에 작성)
