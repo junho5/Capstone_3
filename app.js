@@ -14,11 +14,10 @@ dotenv.config();
 
 // aws
 const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+    accessKeyId: 'AKIASFRLDP76B2R5IA75',
+    secretAccessKey: '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',
+    region: 'ap-northeast-2'
 });
-module.exports = s3;
 
 // upload
 const upload = multer({
@@ -209,11 +208,6 @@ app.get('/detail/:id',(req,res)=>{
 });
 //--------------------------------------------------------
 
-// comment 부분 -------------------------------------------
-app.post('/test',(req,res)=>{
-    res.send(req.body);
-});
-//--------------------------------------------------------
 
 // 관리자 부분 ----------------------------------------------
 app.get('/admin', (req,res)=>{
