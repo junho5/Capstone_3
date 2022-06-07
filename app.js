@@ -32,13 +32,13 @@ const upload = multer({
         conn.query(sql,function(err,data){
             if (err){
                 console.log("실패")
-              }else{
+            }else{
                 const ext = path.extname(file.originalname);//업로드 파일이름을 원본 파일이름 +시간+확장자로 저장
                 console.log(data[0].id_num);
                 cb(null, data[0].id_num+ext);
-        }
-        }
-    )},
+            }
+        })
+      },
     }),
 });
 
@@ -49,7 +49,6 @@ db_config.connect(conn);
 
 // import routers
 const loginRouter = require('./routes/index');
-const { text } = require('express');
 
 
 const app = express();
@@ -68,11 +67,13 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // 요청 경로에 따라 router 실행
 app.use('/',loginRouter);
 
+// aboutUs 부분 -------------------------------------------
+app.get('/aboutus',(req,res)=>{
+    res.render('aboutUs');
+});
+//--------------------------------------------------------
 
-// app.get('/aboutus',(req,res)=>{
-//     res.render('aboutUs');
-// });
-
+// recommend 부분 -----------------------------------------
 app.get('/recommend',(req,res)=>{
     res.render('recommend');
 });
@@ -111,17 +112,21 @@ app.get('/recommend/output',(req,res)=>{
 });
 
 app.post('/recommend/output',(req,res)=>{
-    // backURL=req.header()
-    console.log(req.body);
-    //평가점수 db 처리 할 부분.
-    res.send(`<script type="text/javascript">alert("평가 완료!"); window.location = document.referrer;; </script>`);
+    console.log(req.isAuthenticated())
+    if (req.isAuthenticated()){
+        console.log(req.body);
+        //평가점수 db 처리 할 부분.
+        res.send(`<script type="text/javascript">alert("평가 완료!"); window.location = document.referrer;; </script>`);
+    }else{
+        res.send('<script type="text/javascript">alert("로그인이 필요한 항목입니다."); document.location.href="/login";</script>');  
+    }
     
 });
+//--------------------------------------------------------
 
+// search 부분 -------------------------------------------
 app.get('/search',(req,res)=>{
     res.redirect('/pasing/' + 1)
-    
-    // res.redirect('/search/1');
 });
 app.get('/pasing/:cur',(req,res)=>{
     var page_size = 15;
@@ -182,22 +187,35 @@ app.get('/pasing/:cur',(req,res)=>{
         });
     });
 });
+//--------------------------------------------------------
 
+// detail 부분 -------------------------------------------
 app.get('/detail/:id',(req,res)=>{
     console.log(req.params.id);
     var queryString = 'select * from plant where plant_num = ?';
     conn.query(queryString,[req.params.id],(error,result)=>{
         console.log(result);
-        res.render('detail',{
-            data:result[0]
-        });
+        var sql = "select * from comment where plant_num = ? "
+        conn.query(sql,[parseInt(req.params.id)], (err,comments)=>{
+            console.log(comments);
+            res.render('detail',{
+                data:result[0],
+                comments:comments
+            });
+        })
+        
     });
 
 });
-// comment 부분 추가 예정
-
-
 //--------------------------------------------------------
+
+// comment 부분 -------------------------------------------
+app.post('/test',(req,res)=>{
+    res.send(req.body);
+});
+//--------------------------------------------------------
+
+// 관리자 부분 ----------------------------------------------
 app.get('/admin', (req,res)=>{
     var sql = "select AUTO_INCREMENT as id_num from information_schema.tables where table_name = 'plant' AND table_schema = DATABASE()"
     conn.query(sql, function(err, id_num){
@@ -235,15 +253,6 @@ app.post('/admin',upload.single('file'),(req,res)=>{
       
     })
 })
-
-// app.post('/admin', upload.single('image'));
-
-
-// app.post('/admin', (req,res)=>{
-//     res.send(req.body);
-//     console.log(req.body);
-//     // res.redirect('/admin')
-// });
 //--------------------------------------------------------
 
 // 404 에러처리 미들웨어 (사용자 요청이라서 500위에 작성)
@@ -251,13 +260,13 @@ app.use((req, res, next) => {
     res.status(404).send(`${req.method} ${req.path} is NOT FOUND`);
   });
   
-  // 서버 에러처리 미들웨어
-  app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send('Something broke!');
-  });
-  
-  app.listen(app.get('port'), () => {
-    console.log(`http://localhost:${app.get('port')}에서 대기중`);
-  });
+// 서버 에러처리 미들웨어
+app.use((err, req, res, next) => {
+console.error(err);
+res.status(500).send('Something broke!');
+});
+
+app.listen(app.get('port'), () => {
+console.log(`http://localhost:${app.get('port')}에서 대기중`);
+});
 

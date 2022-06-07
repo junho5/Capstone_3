@@ -25,7 +25,10 @@ router.use(
 router.use(passport.initialize());
 router.use(passport.session());
 //--------------------------------------------------------
-
+router.use((req, res, next) =>{
+    res.locals.user = req.user;
+    next();
+});
 // 메인화면 관련 라우터
 router.get('/',(req,res)=>{
     res.redirect('main');
@@ -33,12 +36,6 @@ router.get('/',(req,res)=>{
 
 router.get('/main',(req,res)=>{
     res.render('main');
-});
-
-router.get('/aboutus',(req,res)=>{
-    // 요 방법으로 로그인 아닌거 구분예정
-    // console.log(req.isAuthenticated())
-    res.render('aboutUs');
 });
 
 // 로그인 관련 라우터
