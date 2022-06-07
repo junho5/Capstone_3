@@ -1,8 +1,10 @@
 import json
 import sys
+import numpy as np
 import pandas as pd
 from pandas import json_normalize
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.cluster import KMeans
 
 inputQuery = json.loads(sys.argv[2])['inputQuery']
 inputData = json.loads(sys.argv[3])['inputData']
@@ -21,8 +23,10 @@ scaler = MinMaxScaler()
 scaler.fit(subset2)
 subset2 = scaler.transform(subset2)
 subset2 = pd.DataFrame(subset2,columns = col)
-
-df1 = pd.concat([subset2,subset3], axis = 1)
+kmeans = KMeans(n_clusters=4, random_state=0).fit(subset2)
+arr = np.array(kmeans.labels_)
+subset2['cluster_num'] = arr
+df1 = subset2
 df2 = df1.groupby('cluster_num').mean()
 df1 = pd.concat([df1,subset1], axis = 1)
 
@@ -33,6 +37,9 @@ c4 = ((a-df2['temp'][3])**2 +(b-df2['light'][3])**2 +(c-df2['water'][3])**2 + (d
 
 if (min(c1,c2,c3,c4) ==c1):
     df3 = df1.query('cluster_num == 0')
+    if(f ==0):
+        df3 =df3.query('poison ==0')
+    else: df3 =df3.query('poison ==1')
     dis = []
     for idx,row in df3.iterrows():
         dis.append(((a-row['temp'])**2 +(b-row['light'])**2 +(c-row['water'])**2 + (d-row['height'])**2 + (e-row['width'])**2)**0.5)
@@ -44,6 +51,9 @@ if (min(c1,c2,c3,c4) ==c1):
     print(result)
 elif (min(c1,c2,c3,c4) ==c2):
     df3 = df1.query('cluster_num == 1')
+    if(f ==0):
+        df3 =df3.query('poison ==0')
+    else: df3 =df3.query('poison ==1')
     dis = []
     for idx,row in df3.iterrows():
         dis.append(((a-row['temp'])**2 +(b-row['light'])**2 +(c-row['water'])**2 + (d-row['height'])**2 + (e-row['width'])**2)**0.5)
@@ -55,6 +65,9 @@ elif (min(c1,c2,c3,c4) ==c2):
     print(result)
 elif (min(c1,c2,c3,c4) ==c3):
     df3 = df1.query('cluster_num == 2')
+    if(f ==0):
+        df3 =df3.query('poison ==0')
+    else: df3 =df3.query('poison ==1')
     dis = []
     for idx,row in df3.iterrows():
         dis.append(((a-row['temp'])**2 +(b-row['light'])**2 +(c-row['water'])**2 + (d-row['height'])**2 + (e-row['width'])**2)**0.5)
@@ -68,6 +81,9 @@ elif (min(c1,c2,c3,c4) ==c3):
     print(result)
 elif (min(c1,c2,c3,c4) ==c4):
     df3 = df1.query('cluster_num == 3')
+    if(f ==0):
+        df3 =df3.query('poison ==0')
+    else: df3 =df3.query('poison ==1')
     dis = []
     for idx,row in df3.iterrows():
         dis.append(((a-row['temp'])**2 +(b-row['light'])**2 +(c-row['water'])**2 + (d-row['height'])**2 + (e-row['width'])**2)**0.5)
@@ -77,12 +93,3 @@ elif (min(c1,c2,c3,c4) ==c4):
     result = df3.head(15)
     result = result.to_json(orient = 'records')
     print(result)
-
-
-
-
-# ex = pd.DataFrame({"value":[c1,c2,c3,c4,1],"ab":[a,b,c,d,e]})
-# # df1=df1.sort_values('plant_num')
-# df1 = ex.to_json(orient = 'records')
-# # # # data = json.dumps(df2, ensure_ascii=False)
-# print(df1)

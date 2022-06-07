@@ -6,7 +6,7 @@ block content
             #main2.clearfix
                 #content 
                     p.fs-4.text-center  식물을 키울 장소의 환경에 맞게 선택지를 골라주세요
-                    form#input_form.row.align-items-center(method = 'get', action='/recommend/output' onsubmit="return inputCheck();")
+                    form#input_form.row.align-items-center(method = 'get', action='/recommend/output' )
                         .plant_water.col-sm-6.mb3
                             label.form-label 원하는 물주기 기준을 선택하세요.
                             select.form-select(name ='plant_water')
@@ -44,7 +44,7 @@ block content
 
                         .plant_height.col-sm-6
                             label.form-label 식물의 높이를 선택해주세요.
-                            select.form-select(name = 'plant_hight')
+                            select.form-select(name = 'plant_height')
                                 option(selected value=15) 0(cm) ~ 30(cm)
                                 option(value=45) 31(cm) ~ 60(cm)
                                 option(value=75) 61(cm) ~ 90(cm)
