@@ -91,25 +91,6 @@ router.post('/admit',passport.authenticate('local', {
     failureRedirect: '/join'
     })
 );
-//--------------------------------------------------------
-// router.post('/admit', (req, res) => {
-//     var web_id = req.body.web_id;
-//     var web_password = req.body.web_password;
-//     if (web_id &&  web_password){
-//         conn.query('select * from user where web_id=? and web_password=?', [web_id,web_password], (err, data) => {
-//             if (err) throw err;
-//             if (data.length > 0 ){
-//                 res.redirect('main')
-//                 res.end();
-//             }else {              
-//                 res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); document.location.href="/login";</script>');    
-//             }            
-//         });
-//     } else {        
-//         res.send('<script type="text/javascript">alert("web_id과 web_password를 입력하세요!"); document.location.href="/login";</script>');    
-//         res.end();
-//     }
-// });
 
 
 // 회원가입 관련 라우터

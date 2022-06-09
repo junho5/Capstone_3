@@ -144,26 +144,34 @@ app.post('/recommend/output',(req,res)=>{
 
 // 관리자 부분 ----------------------------------------------
 app.get('/admin', (req,res)=>{
-    var sql = "select AUTO_INCREMENT as id_num from information_schema.tables where table_name = 'plant' AND table_schema = DATABASE()"
-    conn.query(sql, function(err, id_num){
-        if (err) {
-            console.log(err +"mysql 조회 실패");
-            return
+    if (req.isAuthenticated()){
+        if (req.user.web_id =="master" && req.user.web_password=="0000"){
+            var sql = "select AUTO_INCREMENT as id_num from information_schema.tables where table_name = 'plant' AND table_schema = DATABASE()"
+        conn.query(sql, function(err, id_num){
+            if (err) {
+                console.log(err +"mysql 조회 실패");
+                return
+            }else{
+                var sql = "select * from plant"
+                conn.query(sql, function(err, data){
+                    if (err) {
+                        console.log('mysql 조회 실패');
+    
+                    }else{
+                        res.render('admin',{id_num: id_num, data: data});
+                        // console.log(data);
+    
+                    }
+                })
+    
+            }
+        });
         }else{
-            var sql = "select * from plant"
-            conn.query(sql, function(err, data){
-                if (err) {
-                    console.log('mysql 조회 실패');
-
-                }else{
-                    res.render('admin',{id_num: id_num, data: data});
-                    // console.log(data);
-
-                }
-            })
-
+            res.send('<script type="text/javascript">alert("관리자만 접근할수있습니다."); document.location.href="/main";</script>');
         }
-    });
+    }else{
+        res.send('<script type="text/javascript">alert("관리자만 접근할수있습니다."); document.location.href="/main";</script>');
+    }
 });
 app.post('/admin',upload.single('file'),(req,res)=>{
     console.log(req.body);
@@ -175,7 +183,8 @@ app.post('/admin',upload.single('file'),(req,res)=>{
         console.log("upload 실패");
       } else{
         console.log(rows.insertId);
-        res.redirect('/admin');
+        // res.redirect('/upload');
+        res.redirect('/admin')
 
       }
       
