@@ -11,9 +11,9 @@ var conn = db_config.init();
 
 // aws
 const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+    accessKeyId: 'AKIASFRLDP76P3VYRAPZ',
+    secretAccessKey: '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',
+    region: 'ap-northeast-2'
 });
 
 // upload
