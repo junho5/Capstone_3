@@ -43,6 +43,10 @@ router.get('/login',(req,res)=>{
     res.render('login');
 });
 
+router.get('/aboutUs',(req,res)=>{
+    res.render('aboutUs');
+});
+
 //--------------------------------------------------------
 passport.serializeUser(function(user, done) {
     console.log("serializeUser ", user)

@@ -19,7 +19,7 @@ db_config.connect(conn);
 
 // import routers
 const loginRouter = require('./routes/index');
-const aboutusRouter = require('./routes/aboutus');
+// const aboutusRouter = require('./routes/aboutus');
 const recommendRouter = require('./routes/recommend');
 const detailRouter = require('./routes/detail');
 const adminRouter = require('./routes/admin');
@@ -39,7 +39,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // 요청 경로에 따라 router 실행
 app.use('/',loginRouter);
-app.use('/aboutus',aboutusRouter);
+// app.use('/aboutus',aboutusRouter);
 app.use('/recommend',recommendRouter);
 app.use('/detail',detailRouter);
 app.use('/admin',adminRouter);
