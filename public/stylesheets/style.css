@@ -404,6 +404,9 @@ p{
 #myform fieldset legend{
     text-align: center;
 }
+.infop{
+    word-break: keep-all;
+}
 
 
 
