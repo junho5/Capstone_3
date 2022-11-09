@@ -24,6 +24,13 @@
 
 <br>
 
+## 알고리즘
+
+<figure class="half">
+    <img src="./images/algo1.JPG">
+    <img src="./images/algo2.JPG">
+<figure>
+
 ## 구현 기능
 
 ### 기능 1
