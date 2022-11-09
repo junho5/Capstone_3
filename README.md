@@ -9,7 +9,6 @@
 ## 프로젝트 소개
 
 <p align="center">
-프로젝트 개요/동기
   <br>
   <img src="./images/about.JPG">
   <br>
@@ -46,12 +45,3 @@
 <br>
 
 ## 라이센스
-
-MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
-
-<!-- Stack Icon Refernces -->
-
-[js]: /images/stack/js.png
-[python]: /images/stack/python.png
-[mysql]: /images/stack/mysql.png
-[express]: /images/stack/express.svg
