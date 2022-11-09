@@ -6,25 +6,22 @@
   <br>
 </p>
 
-목차
-
 ## 프로젝트 소개
 
-<p align="justify">
-프로젝트 개요/동기
-</p>
-
 <p align="center">
-GIF Images
+프로젝트 개요/동기
+  <br>
+  <img src="./images/about.JPG">
+  <br>
 </p>
 
 <br>
 
 ## 기술 스택
 
-| JavaScript |  python   |  Mysql   |  Express   |
-| :--------: | :-------: | :------: | :--------: |
-|   ![js]    | ![python] | ![mysql] | ![express] |
+  <br>
+  <img src="./images/develop.JPG">
+  <br>
 
 <br>
 
