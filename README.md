@@ -24,6 +24,12 @@
 
 <br>
 
+## Data
+
+  <br>
+  <img src="./images/board/data.PNG">
+  <br>
+
 ## 알고리즘
 
 <figure class="half">
@@ -31,15 +37,39 @@
     <img src="./images/algo2.JPG">
 <figure>
 
-## 구현 기능
+## 실제 화면
 
-### 기능 1
+### Main
 
-### 기능 2
+  <br>
+  <img src="./images/board/main.PNG">
+  <br>
 
-### 기능 3
+### 회원가입 및 로그인
 
-### 기능 4
+<br>
+<img src="./images/board/join.PNG">
+<br>
+
+### 검색 및 조회
+
+<br>
+<img src="./images/board/search.PNG">
+<img src="./images/board/detail.PNG">
+<br>
+
+### 사용자 입력 및 식물 추천 결과
+
+<br>
+<img src="./images/board/recommend.PNG">
+<img src="./images/board/result.PNG">
+<br>
+
+### 관리자 모드
+
+<br>
+<img src="./images/board/admin.PNG">
+<br>
 
 <br>
 
@@ -50,5 +80,3 @@
 </p>
 
 <br>
-
-## 라이센스
