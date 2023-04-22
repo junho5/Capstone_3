@@ -1,4 +1,4 @@
-# 프로젝트 이름
+# Plant Gardner
 
 <p align="center">
   <br>
@@ -87,7 +87,6 @@
 
 <br>
 
-## 배운 점 & 아쉬운 점
 
 <p align="justify">
 
